@@ -1,140 +1,135 @@
 :root {
-    /* --main-menu-color: #f0eeee;
-    --main-menu-hover: #ffffff; 
-    --body-color: #fafafa;
-    --filter-color: #dfdfdf;
-    --text-color: rgba(49, 46, 41, 0.877); */
-    --main-menu-color: #4B4A67;
-    --main-menu-hover: #7E8987; 
-    --body-color: #C2CFB2;
-    --filter-color: ##8DB580;
-    --text-color: #DDD1C7;
+  --main-body: #fcfcfc;
+  --main-menu-hover: #87bd08;
+  --background-color: #e2e2e2;
+  --filter-color: #63ad41;
+  --text-color: rgba(73, 73, 73, 0.877);
+  --filter-text-color: #f1f1f1;
 }
 
-
 * {
-    box-sizing: border-box;
-    margin: 0;
-    font-family: Helvetica, sans-serif, Arial;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: Helvetica, sans-serif, Arial;
 }
 
 body {
-    background-color: var(--body-color);
+  background-color: var(--background-color);
 }
 
-header>ul {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    background-color: var(--main-menu-color);
-
+button {
+  background-color: var(--filter-color);
+  color: var(--filter-text-color);
+  border: none;
 }
 
-header>ul>li {
-    margin: 0.5em 0.75em 0.5em 0.75em;
+header > ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  background-color: var(--main-body);
+  padding-inline-start: 10px;
 }
 
+header > ul > li {
+  padding: 0.5em 0.75em 0.5em 0.75em;
+}
+header > ul :hover {
+  background-color: var(--main-menu-hover);
+}
 a {
-    color: var(--text-color);
-    text-decoration: none;
-    cursor: pointer;
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: default;
 }
 
 main {
-    display: flex;
-    flex-direction: row;
-    }
+  display: flex;
+  flex-direction: row;
+}
 
 .filter {
-    color: var(--text-color);
-    background-color: var(--filter-color);
-    min-width: 160px;
-    max-width: 200px;
-    padding:  0 5px 0 5px;
-    /* display: flex;
+  color: var(--filter-text-color);
+  background-color: var(--filter-color);
+  min-width: 160px;
+  max-width: 200px;
+  padding: 0 5px 0 5px;
+  height: 100vh;
+  /* display: flex;
     flex-direction: column; */
 }
 
 .filter div {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 #vendors {
-    
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
 #price-set {
-    width: 80px;
+  width: 80px;
 }
 .products {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin: 1em;
-    row-gap: 2em;   
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 1em;
+  row-gap: 2em;
 }
 
 .product {
-    display: flex;
-    flex-direction: row;
-    background-color: var(--main-menu-color);
-    box-shadow: 5px 5px 10px rgba(69, 71, 78, 0.11);
-    border-radius: 0.5em;
-    color: var(--text-color);
-    padding: 1em;
-    
+  display: flex;
+  flex-direction: row;
+  background-color: var(--main-body);
+  box-shadow: 5px 5px 10px rgba(69, 71, 78, 0.11);
+  border-radius: 0.5em;
+  color: var(--text-color);
+  padding: 1em;
 }
 .products :hover {
-    background-color: navajowhite;
+  color: var(--filter-text-color);
+  background-color: var(--main-menu-hover);
 }
 
-
 .product img {
-    width: 240px;
-    height: 213px;
+  width: 240px;
+  height: 213px;
 }
 
 .prod-details {
-    margin-left: 1em;
+  margin-left: 1em;
 }
 
+@media screen and (max-width: 575px) {
+  header > ul > li {
+    padding: 0.9em 0.25em 0.9em 0.25em;
+    font-size: 0.75em;
+  }
 
+  main {
+    flex-direction: column;
+  }
 
-@media screen and (max-width : 575px) {
-    header>ul>li {
-        margin: 0.9em 0.25em 0.9em 0.25em;
-        font-size: 0.75em;
-    }
-    
-    main {
-        flex-direction: column;
-    }
+  .product {
+    flex-direction: column;
+  }
 
-    .product {
-        flex-direction: column;
-    }
+  .filter {
+    color: var(--filter-text-color);
+    border-right: none;
+    min-width: none;
+    max-width: none;
+    height: 125px;
+    margin-bottom: 5px;
+  }
 
-    .filter {
-        color: var(--text-color);
-        border-right: none;
-        min-width: none;
-        max-width: none;
-        margin-bottom: 5px;
-        justify-content: center;
+  #vendors {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
-
-    }
-
-    #vendors {
-        flex-direction: row;
-        flex-wrap: wrap;
-
-    }
-
-    #vendors div {
-        padding: 5px 10px 5px 10px;
-        
-    }
-
+  #vendors div {
+    padding: 5px 10px 5px 10px;
+  }
 }
