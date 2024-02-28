@@ -1,7 +1,16 @@
 :root {
-    --main-menu-color: #f3f3f3;
-    --text-color: rgba(49, 46, 41, 0.877);
+    /* --main-menu-color: #f0eeee;
+    --main-menu-hover: #ffffff; 
+    --body-color: #fafafa;
+    --filter-color: #dfdfdf;
+    --text-color: rgba(49, 46, 41, 0.877); */
+    --main-menu-color: #4B4A67;
+    --main-menu-hover: #7E8987; 
+    --body-color: #C2CFB2;
+    --filter-color: ##8DB580;
+    --text-color: #DDD1C7;
 }
+
 
 * {
     box-sizing: border-box;
@@ -9,13 +18,11 @@
     font-family: Helvetica, sans-serif, Arial;
 }
 
-header {
-    width: 100%;
-
+body {
+    background-color: var(--body-color);
 }
 
 header>ul {
-    margin-bottom: 1%;
     display: flex;
     flex-wrap: wrap;
     list-style: none;
@@ -24,8 +31,7 @@ header>ul {
 }
 
 header>ul>li {
-    margin-left: 2em;
-    margin-right: 2em;
+    margin: 0.5em 0.75em 0.5em 0.75em;
 }
 
 a {
@@ -37,35 +43,39 @@ a {
 main {
     display: flex;
     flex-direction: row;
-
-}
+    }
 
 .filter {
     color: var(--text-color);
-    border-right: solid 1px var(--text-color);
+    background-color: var(--filter-color);
     min-width: 160px;
     max-width: 200px;
-    padding-left: 5px;
+    padding:  0 5px 0 5px;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.filter div {
+    margin-bottom: 10px;
 }
 
 #vendors {
-    display: flex;
-    flex-direction: column;
+    
     padding-left: 10px;
 }
 
+#price-set {
+    width: 80px;
+}
 .products {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    margin-left: 2em;
-    margin-right: 2em;
-    row-gap: 2em;
-    column-gap: 2%;
-
+    margin: 1em;
+    row-gap: 2em;   
 }
 
-article {
+.product {
     display: flex;
     flex-direction: row;
     background-color: var(--main-menu-color);
@@ -73,11 +83,14 @@ article {
     border-radius: 0.5em;
     color: var(--text-color);
     padding: 1em;
-    /* width: 100vh; */
+    
+}
+.products :hover {
+    background-color: navajowhite;
 }
 
 
-article img {
+.product img {
     width: 240px;
     height: 213px;
 }
@@ -89,12 +102,16 @@ article img {
 
 
 @media screen and (max-width : 575px) {
-
+    header>ul>li {
+        margin: 0.9em 0.25em 0.9em 0.25em;
+        font-size: 0.75em;
+    }
+    
     main {
         flex-direction: column;
     }
 
-    article {
+    .product {
         flex-direction: column;
     }
 
@@ -103,20 +120,21 @@ article img {
         border-right: none;
         min-width: none;
         max-width: none;
-        border-bottom: 1px solid black;
         margin-bottom: 5px;
+        justify-content: center;
 
-        
+
     }
 
     #vendors {
         flex-direction: row;
         flex-wrap: wrap;
+
+    }
+
+    #vendors div {
+        padding: 5px 10px 5px 10px;
         
     }
 
-    #vendors div{
-        padding: 5px 10px 5px 10px;
-    }
-   
 }

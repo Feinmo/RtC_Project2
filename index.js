@@ -33,14 +33,15 @@ productsArray = [
 
 // CONTAINERS
 const articlesMain = document.querySelector(".products");
-const vendorsContainer = document.getElementById("vendors");
+const vendorsContainer = document.getElementById("vendors-filter");
 const priceSliderBar = document.getElementById("price-slider");
-const priceValue = document.querySelector("#price-value");
+const maxPriceValueInput = document.querySelector("#price-set");
+const setPriceValueButton = document.getElementById("activate-price-filter");
+const resetFiltersButton = document.getElementById("reset-filters");
 // END CONTAINERS
-// Special vars
 
 
-
+// PRODUCT TEMPLATE
 populateArticle = (product) => {
     return `
     <div class = "prod-img">
@@ -56,70 +57,91 @@ populateArticle = (product) => {
     </div>`;
 }
 
+//GENERATE ALL PRODUCTS
+const generateArticles = (() => {
+    productsArray.forEach((product) => {
+        const productElement = document.createElement("article");
+        productElement.className = "product";
+        productElement.innerHTML += populateArticle(product);
+        articlesMain.append(productElement);
+    });
+});
+
 // FILTERS
 
+// BY VENDOR
 const populateVendors = (ObjectsArray) => {
     const vendorsList = [];
-    ObjectsArray.map((product) => {
+    ObjectsArray.forEach((product) => {
         if (vendorsList.includes(product.vendor) == false) {
             vendorsList.push(product.vendor)
         };
     });
     return vendorsList;
 };
-
 const vendorsList = populateVendors(productsArray);
 
-const generateVendorCheckboxes = () => {
-    
-    vendorsList.forEach((position) => {
-        const checkboxVendor = document.createElement("INPUT");
-        checkboxVendor.setAttribute("type", "checkbox");
-        checkboxVendor.id = position;
-        const vendorName = (document.createElement("label"))
-        vendorName.setAttribute("for", position);
-        vendorName.textContent = position;
-        const vendorPosition = document.createElement("div");
+const generateVendorSelect = () => {
 
-        vendorPosition.append(checkboxVendor);
-        vendorPosition.append(vendorName);
-
-        vendorsContainer.append(vendorPosition);
-
+    vendorsList.forEach((position, index) => {
+        const option = document.createElement("option");
+        option.textContent = position;
+        option.id = `vendorNo${index}`;
+        vendorsContainer.appendChild(option);
     })
-}
+};
 
-const generatePriceSlider = () => {
-    const pricesArray = [];
-    productsArray.map((product) => {
-        pricesArray.push(product.price);
-    });
-    const minValue = Math.min(...pricesArray);
-    const maxValue = Math.max(...pricesArray)
-
-    priceSliderBar.min = minValue;
-    priceSliderBar.max = maxValue;
-
-    priceValue.textContent = priceSliderBar.value;
-
-}
-
-
-// END FILTERS
-
-//GENERATE PRODUCTS
-const generateArticles = ((Array, targetElement) => {
-    Array.forEach((product) => {
-        const productElement = document.createElement("article");
-        productElement.innerHTML += populateArticle(product);
-        targetElement.append(productElement);
-    });
+const activateVendorsFilter = ((event) => {
+    maxPriceValueInput.value = "";
+    const chosenVendor = event.target.value;
+    articlesMain.innerHTML = "";
+    if (chosenVendor != "none") {
+        productsArray.forEach((product) => {
+            if (product.vendor == chosenVendor) {
+                const productElement = document.createElement("article");
+                productElement.className = "product";
+                productElement.innerHTML += populateArticle(product);
+                articlesMain.append(productElement);
+            };
+        });
+    }
+    else { generateArticles() };
 });
 
-generateArticles(productsArray, articlesMain);
-generateVendorCheckboxes();
-generatePriceSlider();
+// BY PRICE
+const activatePriceFilter = () => {
+    vendorsContainer.value = "none";
+    const maxPrice = maxPriceValueInput.value;
+    articlesMain.innerHTML = "";
+    if (maxPrice != "none") {
+        productsArray.forEach((product) => {
+            if (product.price <= maxPrice) {
+                const productElement = document.createElement("article");
+                productElement.className = "product";
+                productElement.innerHTML += populateArticle(product);
+                articlesMain.append(productElement);
+            };
+        });
+    }
+    else { generateArticles() };
+};
 
-priceSliderBar.addEventListener("input", (event) => {
-    priceValue.textContent = event.target.value;
-});
+// CLEAR FILTERS
+const clearFilters = () => {
+    vendorsContainer.value = "none";
+    maxPriceValueInput.value = "";
+    articlesMain.innerHTML = "";
+    generateArticles();
+}
+
+
+
+
+// BOOT
+generateArticles();
+generateVendorSelect();
+
+
+vendorsContainer.addEventListener("change", activateVendorsFilter);
+setPriceValueButton.addEventListener("click", activatePriceFilter);
+resetFiltersButton.addEventListener("click", clearFilters);
