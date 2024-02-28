@@ -17,12 +17,26 @@ body {
   background-color: var(--background-color);
 }
 
-button {
-  background-color: var(--filter-color);
+#activate-price-filter,
+#reset-filters {
+  background-color: var(--main-menu-hover);
   color: var(--filter-text-color);
-  border: none;
+  border: 1px solid var(--filter-text-color);
+  border-radius: 2px;
 }
-
+#activate-price-filter:hover,
+#reset-filters:hover{
+  background-color: var(--main-body);
+  color: var(--filter-color);
+}
+#activate-price-filter:active,
+#reset-filters:active{
+  border: var(--text-color);
+}
+select,
+input {
+    border: 1px solid var(--background-color);
+}
 header > ul {
   display: flex;
   flex-wrap: wrap;
@@ -53,7 +67,7 @@ main {
   background-color: var(--filter-color);
   min-width: 160px;
   max-width: 200px;
-  padding: 0 5px 0 5px;
+  padding: 5px 5px 0 5px;
   height: 100vh;
   /* display: flex;
     flex-direction: column; */
